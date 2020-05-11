@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Password field</h2>
+
+    <p>The <strong>input type="password"</strong> defines a password field:</p>
+
+    <form action="/login" method="post">
+      <label for="username">Username:</label><br>
+      <input type="text" id="username" name="username"><br>
+      <label for="pwd">Password:</label><br>
+      <input type="password" id="passwd" name="passwd"><br><br>
+      <input type="submit" value="Login">
+    </form>
+    <p>The characters in a password field are masked (shown as asterisks or circles).</p>
+
+    <div>
+      <h2>This page will update every few seconds</h2>
+      <p>Humidity: <span id="Humidity">000</span>%</p>
+      <p>Temperature: <span id="Temperature">000</span>%</p>
+    </div>
+
+
+    <script>
+      var jsonNumber = 0;
+      setInterval(function() {
+        // Call a function repetatively with 200 millisecond interval
+    //    updateHumidity();
+    //    updateJSON();
+      }, 1000); //1000 mSeconds update rate
+
+      function runScript() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("scriptOutput").innerHTML = JSON.parse(this.responseText).scriptOutput;
+          }
+        };
+        xhttp.open("POST", "/runScript", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        var myObj = {
+          scriptInput: "",
+          scriptOutput: "",
+          moreStuff: ""
+        };
+        myObj.scriptInput = document.getElementById("scriptInput").value;
+        xhttp.send(JSON.stringify(myObj));
+      }
+
+      function getLicencePlate(){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            var plateInfoRx = JSON.parse(this.responseText);
+            document.getElementById("getLicencePlateNo").innerHTML = plateInfoRx.number;
+          }
+        };
+        xhttp.open("POST", "/getLicencePlate", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify({}));
+      }
+
+       function sendLicencePlate(){
+         var xhttp = new XMLHttpRequest();
+         xhttp.open("POST", "/licencePlate", true);
+         xhttp.setRequestHeader("Content-Type", "application/json");
+         var plateobject = {
+           plateNumber: "",
+           carColour: ""
+         }
+         var licPlat =  document.getElementById('licencePlate').value;
+         plateobject.plateNumber = licPlat;
+         xhttp.send(JSON.stringify(plateobject));
+       }
+
+       function updateHumidity() {
+         var xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function() {
+           if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("humidity").innerHTML = this.responseText;
+           }
+         };
+         xhttp.open("GET", "/getHumidity?myName=abc&myNum=123", true);
+         xhttp.send();
+       }
+
+       function updateJSON() {
+         var xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function() {
+           if (this.readyState == 4 && this.status == 200) {
+             jsonNumber = JSON.parse(this.responseText).number;
+             document.getElementById("jsonEx").innerHTML = jsonNumber;
+           }
+         };
+         xhttp.open("POST", "/jsonExample", true);
+         xhttp.setRequestHeader("Content-Type", "application/json");
+         var myObj = {
+           myName: "",
+           myNum: ""
+         };
+         myObj.myName = "Joe Smith";
+         myObj.myNum = 123456;
+         xhttp.send(JSON.stringify(myObj));
+       }
+     </script>
+  </body>
+</html>
