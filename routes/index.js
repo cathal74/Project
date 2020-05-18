@@ -18,7 +18,7 @@ var videoData = new Schema({
 var videoInfos = mongoose.model('videoInfo', videoData);
 
 var humidity = 0;
-var temperature = "0";
+var newtemperature = "0";
 
 var device = awsIot.device({
   keyPath: "C:\\nodejs\\MiniProject\\certs\\df7b8df7ef-private.pem.key",
@@ -37,8 +37,8 @@ device
 
 device
   .on('message', function(topic, payload) {
-    temperature = payload.toString();
-    console.log('message', topic, payload.toString());
+    newtemperature = payload.toString();
+    console.log('Topic:', topic, payload.toString());
   });
 
 
@@ -53,9 +53,12 @@ router.get('/', function(req, res, next) {
       });
 });
 
+
 router.get('/getTemp', function(req, res, next) {
-  res.render('getTemp', {temperature: "25"});
+  res.render('getTemp', {temperature: newtemperature});
 });
+
+
 
 
 router.get('/getHumidity', function(req, res, next) {

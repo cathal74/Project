@@ -2,22 +2,164 @@
 <html>
 <head>
 <style>
-div {
-  background-color: lightgrey;
-  width: 300px;
-  border: 15px solid green;
-  padding: 50px;
-  margin: 20px;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Times;
+  padding: 10px;
+  background: #f1f1f;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  text-align: center;
+  background: white;
+}
+
+.header h1 {
+  font-size: 60px;
+}
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: white;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {
+  float: left;
+  width: 75%;
+}
+
+/* Right column */
+.rightcolumn {
+  float: left;
+  width: 25%;
+  background-color: #f1f1f1;
+  padding-left: 20px;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
 }
 </style>
 </head>
 <body>
 
-<h2>{{ temperature }}</h2>
+<div class="header">
+  <h1>Auto-Garden Web Page</h1>
+</div>
 
-<p>The CSS box model is essentially a box that wraps around every HTML element. It consists of: borders, padding, margins, and the actual content.</p>
+<div class="topnav">
+  <a href="/getTemp">Home Page</a>
+  <a href="/pages/pb.html">About</a>
+  <a href="http://192.168.43.237/">Control Center</a>
+  <a href="/weather">Weather Station</a>
+  <a href="/" style="float:right">Log Out</a>
+</div>
 
-<div>This text is the content of the box. We have added a 50px padding, 20px margin and a 15px green border. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+      <h1>What is Auto-Garden?</h1>
+      <p>Auto-Garden is a new more modern way to garden. Auto-Garden allows you to monitor control and water your plants and crops from anywhere in the world. This is the next step in the gardening world. By using Auto-Garden you give youself and your crops the best chance to succeed in the garden industry. We use the most up to date technologies and resources to insure your garden is top quality.</p>
+      <img src="/images/greenhouse.jpg" alt="Jane" style="width:100%">
+    </div>
+    <div class="card">
+      <h2>Technologies Used ESP32</h2>
+      <img src="/images/esp32.jpg" alt="Jane" style="width:50%">
+      <p>The ESP32 is a low-cost system-on-chip (SoC) series created by Espressif Systems. It is an improvement on the popular ESP8266 that is widely used in IoT projects. The ESP32 has both Wi-Fi and Bluetooth capabilities, which make it an all-rounded chip for the development of IoT projects and embedded systems in general.</p>
+    </div>
+  </div>
+  <div style="text-align: center; border: 1px solid" class="rightcolumn">
+
+    <div class="card">
+      <h2>Live Temperature and Humidity Updates</h2>
+      <img src="/images/Temp.jpg" alt="Jane" style="width:100%">
+      <div>
+        <h2>This page will update every few seconds</h2>
+        <p><span id="Temperature">{{ temperature }}</span></p>
+        <button onclick="window.location.href = '/getTemp';">Update</button>
+      </div>
+    </div>
+    <div class="card">
+
+      <img src="/images/help.jpg" alt="Jane" style="width:100%">
+      <button onclick="window.location.href = 'https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/';">Setting up ESP32</button>
+      <button onclick="window.location.href = 'https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/';">Setting up ESP32</button>
+    </div>
+    <div class="card">
+      <h3>Follow Me</h3>
+      <p>Some text..</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
 
 </body>
 </html>

@@ -109,14 +109,14 @@ body {
 <body>
 
 <div class="header">
-  <h1>Auto-Garden Weather Station</h1>
+  <h1>Auto-Garden Web Page</h1>
 </div>
 
 <div class="topnav">
   <a href="/pages/pa.html">Home Page</a>
   <a href="/pages/pb.html">About</a>
-  <a href="http://192.168.1.12/">Control Center</a>
-  <a href="http://192.168.1.12/">Weather Station</a>
+  <a href="http://192.168.43.237/">Control Center</a>
+  <a href="/getTemp">Weather Station</a>
   <a href="/" style="float:right">Log Out</a>
 </div>
 
@@ -140,8 +140,8 @@ body {
       <img src="/images/Temp.jpg" alt="Jane" style="width:100%">
       <div>
         <h2>This page will update every few seconds</h2>
-        <p>Humidity: <span id="Humidity">{{Humidity}}</span>%</p>
-        <p>Temperature:  <span id="Temperature">{{Temperature}}</span>°C</p>
+        <p>Humidity: <span id="Humidity">68</span>%</p>
+        <p>Temperature:  <span id="Temperature">{{ temperature }}</span>°C</p>
         <button onclick="window.location.href = '/pages/pa.html';">Update</button>
       </div>
     </div>
